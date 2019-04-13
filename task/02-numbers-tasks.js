@@ -234,8 +234,7 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    console.log('value:', value);
-    console.log('typeof(value):', typeof(value));
+    
     if (typeof(value) === 'object' && value!=null) return value;
     else if (typeof(+value) === 'number' && !isNaN(+value)) return +value;
     else return def;

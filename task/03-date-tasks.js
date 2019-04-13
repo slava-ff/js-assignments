@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return Date.parse(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return Date.parse(value);
 }
 
 
@@ -56,7 +56,10 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   if (date.getFullYear()%4 != 0) return false;
+   else if (date.getFullYear()%100 != 0) return true;
+   else if (date.getFullYear()%400 !=0) return false;
+   else return true;   
 }
 
 
@@ -76,7 +79,35 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   let x = endDate-startDate;
+   // 1 ss = 1000 sss
+   // 1 mm = 60 ss / 60 000 sss 
+   // 1 HH = 60 mm / 3 600 ss // 3 600 000 sss
+   let string = '';
+   let hours = Math.floor(x/3600000);
+   if (hours<10) string = string.concat('0');
+   string = string.concat(hours);
+   string = string.concat(':');
+
+   x = x%3600000;
+   let mins = Math.floor(x/60000);
+   if (mins<10) string = string.concat('0');
+   string = string.concat(mins);
+   string = string.concat(':');
+
+   x = x%60000;
+   let secs = Math.floor(x/1000);
+   if (secs<10) string = string.concat('0');
+   string = string.concat(secs);
+   string = string.concat('.');
+
+   x = x%1000;
+   let msecs = x;
+   if (msecs<10) string = string.concat('00');
+   else if (msecs<100) string = string.concat('0');
+   string = string.concat(msecs);
+
+   return string;
 }
 
 
@@ -94,7 +125,13 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+   let hrs = date.toGMTString().slice(17, 19);
+   let mins = date.toGMTString().slice(20, 22);
+   let angle = Math.abs(0.5*60*hrs-0.5*11*mins);
+   for (;angle>180;) {
+      angle = Math.abs(360 - angle);
+   }
+   return angle*Math.PI/180;     
 }
 
 
