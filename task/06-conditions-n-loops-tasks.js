@@ -30,7 +30,10 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if(num%3 == 0 && num%5 == 0) return 'FizzBuzz';
+    else if (num%3 == 0) return 'Fizz';
+    else if (num%5 == 0) return 'Buzz';
+    else return num;
 }
 
 
@@ -46,7 +49,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    return n ? n * getFactorial(n - 1) : 1;
 }
 
 
@@ -63,7 +66,13 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let dif = n2-n1;
+    let x = 0;
+    for (let i=0; i<=dif; i++) {
+        x = x + n1;
+        n1++;
+    }
+    return x;
 }
 
 
@@ -82,7 +91,8 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    if (a<b+c && b<a+c && c<a+b) return true;
+    else return false;
 }
 
 
@@ -119,7 +129,9 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    if (rect2.left > rect1.left + rect1.width || rect2.top > rect1.top + rect1.height) return false;
+    else if (rect1.left > rect2.left + rect2.width || rect1.top > rect2.top + rect2.height) return false;
+    else return true;
 }
 
 
@@ -150,7 +162,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return Math.pow((point.x-circle.center.x), 2) + Math.pow((point.y-circle.center.y), 2) < Math.pow(circle.radius, 2);
 }
 
 
@@ -166,7 +178,15 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    for (let i=0; i<=str.length; i++) {
+        let count = 0;
+        for (let n=0; n<=str.length; n++) {
+            if (i!=n) {
+                if (str[i] == str[n]) count++;
+            }
+        }
+        if (count == 0) return str[i];
+    }
 }
 
 
@@ -185,14 +205,21 @@ function findFirstSingleChar(str) {
  * @example
  *   0, 1, true, true   => '[0, 1]'
  *   0, 1, true, false  => '[0, 1)'
- *   0, 1, false, true  => '(0, 1]'
+ *   0, 1, false, true  => '(0str.concat('(')1]'
  *   0, 1, false, false => '(0, 1)'
  * Smaller number has to be first :
  *   5, 3, true, true   => '[3, 5]'
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    let str = '';
+    if (isStartIncluded) str = str.concat('[');
+    else str = str.concat('(');
+    if (a<b) str = str.concat(a).concat(', ').concat(b);
+    else str = str.concat(b).concat(', ').concat(a);
+    if (isEndIncluded) str = str.concat(']');
+    else str = str.concat(')');
+    return str;
 }
 
 
@@ -209,7 +236,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -226,7 +253,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return +num.toString().split('').reverse().join('');
 }
 
 
@@ -251,7 +278,18 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    let arr = ccn.toString().split('');
+    let i=0;
+    if (arr.length%2 != 0) i=i+1;
+    for (; i<arr.length; i=i+2) {
+        let temp = arr[i]*2;
+        if (temp>9) temp = temp-9;
+        arr[i] = temp;
+    }
+    let count = 0;
+    for (let n=0; n<arr.length; n++) count = count + +arr[n];
+    if (count%10==0) return true;
+    else return false;
 }
 
 
@@ -270,7 +308,14 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    for (;num>9;) {
+        let arr = num.toString().split('');
+        num = 0;
+        for (let i=0; i<arr.length; i++) {
+            num = num + +arr[i];
+        }
+    }
+    return num;
 }
 
 
