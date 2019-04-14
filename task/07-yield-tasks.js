@@ -58,7 +58,6 @@ function* get99BottlesOfBeer() {
         song.push(string);
         
     }
-    console.log(song);
     return song;
 
     /*
