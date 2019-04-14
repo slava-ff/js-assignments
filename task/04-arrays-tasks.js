@@ -464,16 +464,14 @@ function toStringList(arr) {
  */
 function sortCitiesArray(arr) {
    let res = arr.sort(function(a, b){
-      if (a.city < b.city) return -1;
-      if (a.city > b.city) return 1;
-      return 0;
-   })
-   let res2 = res.sort(function(a, b){
+      if (a.country == b.country) {
+         if (a.city < b.city) return -1;
+         if (a.city > b.city) return 1;
+      }
       if (a.country < b.country) return -1;
       if (a.country > b.country) return 1;
-      return 0;
    })
-   return res2;
+   return res;
 }
 
 /**
