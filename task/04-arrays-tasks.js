@@ -539,7 +539,7 @@ function getIntervalArray(start, end) {
 function distinct(arr) {
    let temp = [];
    return arr.filter(function(i){
-      if (!temp.includes(i)) {
+      if (temp.indexOf(i)==-1) {
          temp.push(i);
          return i;
       }
