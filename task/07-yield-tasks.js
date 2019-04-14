@@ -33,7 +33,67 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    let song = [];
+    for (let i = 99; i>=0; i--) {
+        let string = '';
+        let btl = 'bottle';
+        if (i!=1) btl = btl.concat('s');
+        if (i<99) {
+            let string2 = '';
+            let phrase3 = 'Take one down and pass it around, ';
+            let phrase4 = ' of beer on the wall.';
+            if (i!=0) string2 = string2.concat(phrase3).concat(i).concat(' ').concat(btl).concat(phrase4);
+            else string2 = string2.concat(phrase3).concat('no more ').concat(btl).concat(phrase4); 
+            song.push(string2);
+        }
+        let phrase1 = ' of beer on the wall, ';
+        let phrase2 = ' of beer.';
+        if (i!=0) string = string.concat(i).concat(' ').concat(btl).concat(phrase1).concat(i).concat(' ').concat(btl).concat(phrase2);
+        else {
+            string = string.concat('No more ').concat(btl).concat(phrase1).concat('no more ').concat(btl).concat(phrase1);
+            song.push(string);
+            string = '';
+            string = string.concat('Go to the store and buy some more, ').concat('99 ').concat(btl).concat(' of beer on the wall.');
+        }
+        song.push(string);
+        
+    }
+    console.log(song);
+    return song;
+
+    /*
+    let res = [];
+    let song = '';
+    for (let i = 99; i>=0; i--) {
+        let string = '';
+        let btl = 'bottle';
+        if (i!=1) btl = btl.concat('s');
+        if (i<99) {
+            let string2 = '';
+            let phrase3 = 'Take one down and pass it around, ';
+            let phrase4 = ' of beer on the wall.';
+            if (i!=0) string2 = string2.concat(phrase3).concat(i).concat(' ').concat(btl).concat(phrase4).concat('\n');
+            else string2 = string2.concat(phrase3).concat('no more ').concat(btl).concat(phrase4).concat('\n');
+            song = song.concat(string2);
+        }
+        let phrase1 = ' of beer on the wall, ';
+        let phrase2 = ' of beer.';
+        if (i!=0) string = string.concat(i).concat(' ').concat(btl).concat(phrase1).concat(i).concat(' ').concat(btl).concat(phrase2).concat('\n');
+        else {
+            string = string.concat('No more ').concat(btl).concat(phrase1).concat('no more ').concat(btl).concat(phrase1).concat('\n');
+            song = song.concat(string);
+            string = '';
+            string = string.concat('Go to the store and buy some more, ').concat('99 ').concat(btl).concat(' of beer on the wall.');
+        }
+        song = song.concat(string);;
+        
+    }
+    console.log(song);
+    //res.push(song);
+    res[0] = song;
+    console.log(res);
+    return res;*/
+
 }
 
 

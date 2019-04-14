@@ -391,6 +391,12 @@ function isBracketsBalanced(str) {
  */
 function timespanToHumanString(startDate, endDate) {
     throw new Error('Not implemented');
+    //let x = endDate-startDate;
+
+
+    // 1 ss = 1000 sss
+    // 1 mm = 60 ss / 60 000 sss 
+    // 1 HH = 60 mm / 3 600 ss // 3 600 000 sss
 }
 
 
@@ -414,7 +420,18 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    let target = [];
+    for (let i=1; i<=n; i++) {target[i-1] = i;}
+    target = target.join('');
+    let arr = [];
+    function abc (x, tl) {
+        arr.push(x%tl);
+        x = Math.floor(x/tl);
+        if (x>0) {abc(x, tl)};
+    }
+    abc (num, n);
+    let arrRev = arr.reverse();
+    return arrRev.join('');
 }
 
 
@@ -431,7 +448,22 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    let arr2 = pathes.map(n => n.length);
+    let arr3 = arr2.sort(function(a, b) {return a - b;});
+    let indexOfMin = arr2.indexOf(arr3[0]);
+    let shortestPath = pathes[indexOfMin];
+    let str = '';
+    for (let i=0; i<shortestPath.length; i++) {
+        let count = 0;
+        for (let n=0; n<pathes.length; n++) {
+            if (shortestPath[i] != pathes[n][i]) count++;
+        }
+        if (count==0) str = str.concat(shortestPath[i]);
+        else break;
+    }
+    let last = str.lastIndexOf('/');
+    if (last==-1) return '';
+    else return str.slice(0, last+1);
 }
 
 
